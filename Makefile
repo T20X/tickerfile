@@ -5,7 +5,7 @@ DEBUG = -g
 CXX = g++
 CXXFLAGS = -O2 -Wall -fno-use-linker-plugin -std=c++1y -static-libstdc++ -m32 -pthread -D_REENTRANT $(INCLUDES)
 
-all: tickerplant generatetickerfile
+all: tickerplant
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $<
