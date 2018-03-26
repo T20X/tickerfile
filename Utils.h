@@ -3,7 +3,11 @@
 #include <vector>
 #include <string>
 #include <regex>
+#include <climits>
+#include <cmath>
 
+/* --------------------------------------------------------------
+*/
 class Utils
 {
 public:
@@ -36,7 +40,7 @@ public:
         {
             return val;
         }
-        else if (isnormal(val))
+        else if (std::isnormal(val))
         {
             return val;
         }
@@ -47,6 +51,8 @@ public:
     }
 };
 
+/* --------------------------------------------------------------
+ */
 class null_out_buf : public std::streambuf
 {
 public:
@@ -61,6 +67,8 @@ public:
     }
 };
 
+/* --------------------------------------------------------------
+ */
 class null_out_stream : public std::ostream
 {
 public:
