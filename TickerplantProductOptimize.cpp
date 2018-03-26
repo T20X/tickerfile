@@ -46,12 +46,19 @@ void TickerplantProductOptimize::add(const AddRecordCommand& cmd)
  */
 void TickerplantProductOptimize::print(const PrintCommand& cmd, std::ostream& o)
 { 
-    std::vector<TimeseriesDetails> detailsList;      
+    struct TimeseriesPrintTracker
+    {
+        Timeseries::iterator current;
+        Timeseries::const_iterator upperBound;
+        std::string field;
+    };
+
+    std::vector<TimeseriesPrintTracker> trackers;      
 
     Table& table = m_storage[cmd.sym];
     for (auto& timeseries : table)
     {  
-        TimeseriesDetails details;
+        TimeseriesPrintTracker details;
         {
             details.field = timeseries.first;
 
@@ -65,7 +72,7 @@ void TickerplantProductOptimize::print(const PrintCommand& cmd, std::ostream& o)
                 timeseries.second.end(),
                 DataPoint{ cmd.to, 0.0 });
 
-            detailsList.push_back(details);
+            trackers.push_back(details);
         }           
     }
 
@@ -74,24 +81,24 @@ void TickerplantProductOptimize::print(const PrintCommand& cmd, std::ostream& o)
     {
         // re-evaluate the current timestamp
         currentTimestamp = cmd.to;
-        for (std::vector<TimeseriesDetails>::iterator details = detailsList.begin();
-            details != detailsList.end();)
+        for (std::vector<TimeseriesPrintTracker>::iterator tracker = trackers.begin();
+            tracker != trackers.end();)
         {
-            if (details->current == details->upperBound)
+            if (tracker->current == tracker->upperBound)
             {
-                details = detailsList.erase(details);
+                tracker = trackers.erase(tracker);
                 continue;
             }
-            else if (currentTimestamp > details->current->time)
+            else if (currentTimestamp > tracker->current->time)
             {
-                currentTimestamp = details->current->time;
+                currentTimestamp = tracker->current->time;
             }
 
-            details++;
+            tracker++;
         }
 
         // print all fields and values for current timestamp
-        for (auto& details : detailsList)
+        for (auto& details : trackers)
         {
             if (details.current->time == currentTimestamp)
             {

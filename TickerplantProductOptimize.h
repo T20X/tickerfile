@@ -31,12 +31,5 @@ private:
 
     Storage m_storage;
 
-    struct TimeseriesDetails
-    {
-        Timeseries::iterator current;
-        Timeseries::const_iterator upperBound;
-        std::string field;
-    };
-
     friend bool operator< (const DataPoint& left, const DataPoint& right);    
 };
