@@ -9,6 +9,9 @@
 #include "Commands.h"
 #include "ITickerplant.h"
 
+/* For each symbol it maintains a vector of fields from tickerfile. Effiency is best achieved when the output
+   is done through hifgh-performance I/O rather then just standart output.
+*/
 class TickerplantPrintOptimize : public ITickerplant
 {
 public:

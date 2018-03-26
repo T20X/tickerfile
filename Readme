@@ -1,0 +1,4 @@
+It requires C++11 comptablie complier to compile.
+Works in Visual Studio 2015 and gcc 4.9.2 at the very least. Makefile to gcc is included.
+
+-OptimizePrint and -OptimizeProduct enable an order of magnitue performance improvements for respective operations. Though they are mutally exclusive, as otherwise more RAM will be rrequired to keep tickerfile data in-memory for both cases. -OptimizePrint is default.

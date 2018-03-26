@@ -23,6 +23,4 @@ private:
 private:
     std::unique_ptr<class ITickerplant> m_tickerplant;
     std::unique_ptr<class ICommandFactory> m_cmdFactory;
-
-
 };

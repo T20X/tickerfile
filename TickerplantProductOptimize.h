@@ -8,6 +8,9 @@
 #include "Commands.h"
 #include "ITickerplant.h"
 
+/* Each field for a given symbol is stored in a separate congitues memory, 
+   hence achieving the lowest latency when doing per field data computation
+*/
 class TickerplantProductOptimize : public ITickerplant
 {
 public:
