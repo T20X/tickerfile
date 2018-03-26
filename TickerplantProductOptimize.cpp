@@ -165,5 +165,6 @@ void TickerplantProductOptimize::product(const ProductCommand& cmd, std::ostream
         }
     }   
 
+    //overflows are not reported!
     o << product << "\n";
 }

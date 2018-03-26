@@ -10,5 +10,5 @@ public:
     Command::Ptr create(const std::vector<std::string>& cmdParams);
 
 private:
-    std::vector<std::function<Command::Ptr(std::vector<std::string>)>> m_handlers;
+    std::vector<std::function<Command::Ptr(std::vector<std::string>)>> m_makers;
 };

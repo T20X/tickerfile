@@ -91,8 +91,7 @@ void TickerplantPrintOptimize::product(const ProductCommand& cmd, std::ostream& 
         t.end(),
         p);
 
-    double product = 0;
-
+    double product = 0; 
     time_t prevTimestamp = 0;
     double field1Val = 0, field2Val = 0;
     while (currentIt != upperBoundIt)
@@ -115,5 +114,7 @@ void TickerplantPrintOptimize::product(const ProductCommand& cmd, std::ostream& 
     }
 
     product += field1Val * field2Val; 
+
+    //overflows are not reported!
     o << product << "\n";
 }

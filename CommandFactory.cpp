@@ -6,7 +6,7 @@
 
 /* --------------------------------------------------------------
  */
-class ParseTickerfileCommand
+class TickerfileCommandMaker
 {
 public:
     Command::Ptr operator()(const std::vector<std::string>& cmdParams)
@@ -26,7 +26,7 @@ public:
 
 /* --------------------------------------------------------------
  */
-class ParseAddRecordCommand
+class AddRecordCommandMaker
 {
 public:
     Command::Ptr operator()(const std::vector<std::string>& cmdParams)
@@ -59,7 +59,7 @@ public:
 
 /* --------------------------------------------------------------
  */
-class ParsePrintCommand
+class ParsePrintCommandMaker
 {
 public:
     Command::Ptr operator()(const std::vector<std::string>& cmdParams)
@@ -81,7 +81,7 @@ public:
 
 /* --------------------------------------------------------------
  */
-class ParseProductCommand
+class ParseProductCommandMaker
 {
 public:
     Command::Ptr operator()(const std::vector<std::string>& cmdParams)
@@ -107,10 +107,10 @@ public:
 */
 CommandFactory::CommandFactory()
 {    
-    m_handlers.push_back(ParseTickerfileCommand());
-    m_handlers.push_back(ParsePrintCommand());
-    m_handlers.push_back(ParseProductCommand());
-    m_handlers.push_back(ParseAddRecordCommand());
+    m_makers.push_back(TickerfileCommandMaker());
+    m_makers.push_back(ParsePrintCommandMaker());
+    m_makers.push_back(ParseProductCommandMaker());
+    m_makers.push_back(AddRecordCommandMaker());
 }
 
 /* --------------------------------------------------------------
@@ -119,7 +119,7 @@ Command::Ptr CommandFactory::create(const std::vector<std::string>& cmdParams)
 {
     Command::Ptr c;
  
-    for (const auto& handler : m_handlers)
+    for (const auto& handler : m_makers)
     {
         c = handler(cmdParams);
         if (c)
